@@ -1,0 +1,26 @@
+<%- include('partials/header' , { title: 'Login' })-%>
+<div class="d-flex align-items-center flex-column justify-content-center">
+    <div>
+    <div  class="text-start">
+        <h1 class="fw-bold">Login</h1>
+    </div>
+    <form action="/login" method="post">
+        <div class="form-group text-start">
+            <div class="my-1">
+                <label for="email" class="fw-bold">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+
+            </div>
+        </div>
+        <div class="form-group text-start">
+            <div class="my-1">
+                <label for="password" class="fw-bold">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+            </div>
+        </div>
+        <input type="submit" value="Sign in" class="btn btn-secondary fw-bold">
+    </form>
+
+</div>
+</div>
+<%- include('partials/footer')-%>

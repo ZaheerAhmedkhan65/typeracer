@@ -1,0 +1,28 @@
+<%- include('partials/header'), { title: 'User Game Stats' } -%>
+<h1>User Game Stats</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Game ID</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Score</th>
+                <th>Car Type</th>
+                <th>Winner</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% stats.forEach(stat => { %>
+                <tr>
+                    <td><%= stat.game_id %></td>
+                    <td><%= stat.start_time %></td>
+                    <td><%= stat.end_time %></td>
+                    <td><%= stat.score %></td>
+                    <td><%= stat.car_type %></td>
+                    <td><%= stat.is_winner ? 'Yes' : 'No' %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <%- include('partials/footer') -%>

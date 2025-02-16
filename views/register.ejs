@@ -1,0 +1,30 @@
+<%- include('partials/header') , { title: 'Login' }-%>
+<div class="d-flex align-items-center flex-column justify-content-center">
+    <div>
+    <div  class="text-start">
+        <h1 class="fw-bold">Sign Up</h1>
+    </div>
+    <form action="/register" method="post">
+        <div class="form-group text-start">
+            <div class="my-1">
+                <label for="name" class="fw-bold">Name</label>
+                <input type="text" name="name" id="name" placeholder="Name" class="form-control" required>
+            </div>
+            <div class="my-1">
+                <label for="email" class="fw-bold">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email" class="form-control" autocomplete="off" required>
+
+            </div>
+        </div>
+        <div class="form-group text-start">
+            <div class="my-1">
+                <label for="password" class="fw-bold">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" class="form-control" required>
+            </div>
+        </div>
+        <input type="submit" value="Sign Up" class="btn btn-secondary fw-bold">
+    </form>
+
+</div>
+</div>
+<%- include('partials/footer')-%>

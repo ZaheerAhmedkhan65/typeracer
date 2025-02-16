@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Typing Game</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1>Typing Race Game</h1>
+        </div>
+
+        <div id="car-selection" class="d-flex gap-2 align-items-center justify-content-center"></div>
+        <div class="d-flex align-items-center justify-content-center">
+            <button id="start-button" class="btn btn-secondary my-2 fw-bold" style="display:none;">Start Game</button>
+        </div>
+        <div class="main-content">
+            <div class="race-track">
+                <div id="race-track" style="position: relative; height: 100px; width: 92%;"></div>
+            </div>
+            <div id="target-text"></div>
+            <div id="result"></div>
+            <input type="text" id="typing-input" disabled>
+        </div>
+        
+
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/game.js"></script>
+    <script>
+        window.userName = '<%= user.name %>';
+        window.userId = '<%= user.id %>';
+        console.log(window.userName);
+        console.log(window.userId);
+    </script>
+</body>
+
+</html>
