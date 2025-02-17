@@ -36,6 +36,7 @@ let user = null;
 function isAuthenticated(req, res, next) {
     const token = req.cookies.token;
     if (!token) {
+        console.log("No token found, redirecting to login...");
         return res.redirect('/users/login');
     }
     try {
@@ -43,25 +44,47 @@ function isAuthenticated(req, res, next) {
         req.user = decoded;
         next();
     } catch (err) {
+        console.log("Invalid token, redirecting to login...");
+        res.clearCookie('token');
         res.redirect('/users/login');
     }
 }
 
+
 // Routes
 app.get('/', (req, res) => {
     const token = req.cookies.token;
-    let user = null;
+    console.log("Token from cookies:", token); // Debugging
 
-    if (token) {
-        try {
-            user = jwt.verify(token, SECRET_KEY);
-        } catch (err) {
-            res.clearCookie('token'); // Clear invalid token
-        }
+    if (!token) {
+        console.log("No token found, redirecting to login...");
+        return res.redirect('/users/login');
     }
 
-    res.render('index', { user });
+    try {
+        const user = jwt.verify(token, SECRET_KEY);
+        console.log("User decoded from token:", user);
+
+        // Query to fetch all users except the current user
+        mysql.query("SELECT * FROM users WHERE id != ?", [user.id], (err, results) => {
+            if (err) {
+                console.error("Database error:", err);
+                return res.status(500).send('Database error');
+            }
+            
+            console.log("Users fetched:", results); // Debugging
+
+            res.render('index', { users: results, user });
+        });
+
+    } catch (err) {
+        console.log("Invalid token, clearing cookie and redirecting...");
+        res.clearCookie('token'); // Clear invalid token
+        return res.redirect('/users/login');
+    }
 });
+
+
 
 app.get('/race', isAuthenticated, (req, res) => {
     try {
@@ -141,9 +164,13 @@ app.post('/login', (req, res) => {
         // Set the token in a cookie
         res.cookie('token', token, { httpOnly: true });
 
+        console.log('Login successful! Redirecting to home page.');
+
+        // Ensure the cookie is properly set before redirecting
         res.redirect('/');
     });
 });
+
 
 // Logout by clearing JWT cookie
 app.get('/logout', (req, res) => {

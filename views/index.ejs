@@ -1,3 +1,21 @@
 <%- include('partials/header', { title: 'Typing Game' })-%>
+    <div class="row">
+        <div class="col-lg-3 text-start">
+            <% if (users) { %>
+                <h3>Users</h3>
+                <% users.forEach((user)=> { %>
+                    <div class="user">
+                        <!-- <img src="https://i.pravatar.cc/150?u=<%- user.id -%>" alt="<%- user.name -%>"> -->
+                        <span><%- user.name -%></span>
+                    </div>
+                    <%})%>
+                        <% }else{%>
+                            No users
+                            <%}%>
+        </div>
+        <div class="col-lg-9 text-start">
+            <h3>Games</h3>
+        </div>
+    </div>
 
-<%- include('partials/footer') -%>
+    <%- include('partials/footer') -%>
